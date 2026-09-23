@@ -19,12 +19,10 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-<<<<<<< HEAD
+
                 git branch: 'main', 
                     url: 'https://github.com/rohitmahesh025-alt/TWSThreeTierAppChallenge.git'
-=======
-                git credentialsId: 'GITHUB', url: 'https://github.com/rohitmahesh025-alt/TWSThreeTierAppChallenge.git'
->>>>>>> 1b64be6 (Fix backend ECR region and repository)
+
             }
         }
         stage('Sonarqube Analysis') {
