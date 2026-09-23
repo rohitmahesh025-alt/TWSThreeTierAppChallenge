@@ -83,7 +83,7 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git credentialsId: 'GITHUB', url: 'https://github.com/rohitmahesh025-alt/TWSThreeTierAppChallenge.git'
+                git branch: 'main', url: 'https://github.com/rohitmahesh025-alt/TWSThreeTierAppChallenge.git'
             }
         }
         stage('Update Deployment file') {
