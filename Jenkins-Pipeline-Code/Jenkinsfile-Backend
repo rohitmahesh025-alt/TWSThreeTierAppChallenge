@@ -101,7 +101,9 @@ pipeline {
                             git config user.name "RohitMahesh-DevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
-                            sed -i "s#^\([[:space:]]*image:[[:space:]]*\).*#\1${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}#" deployment.yaml
+
+                            sed -i 's#^[[:space:]]*image:.*#        image: '${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}'#' deployment.yaml
+
                             echo "Updated deployment image:"
                             grep -n "image:" deployment.yaml
                             git add deployment.yaml
