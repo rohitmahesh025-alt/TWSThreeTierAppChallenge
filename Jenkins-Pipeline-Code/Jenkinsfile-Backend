@@ -101,11 +101,11 @@ pipeline {
                             git config user.name "RohitMahesh-DevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
-                            imageTag=$(grep -oP '(?<=backend:)[^ ]+' deployment.yaml)
-                            echo $imageTag
-                            sed -i "s/${AWS_ECR_REPO_NAME}:${imageTag}/${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}/" deployment.yaml
+                            sed -i "s#^\([[:space:]]*image:[[:space:]]*\).*#\1${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}#" deployment.yaml
+                            echo "Updated deployment image:"
+                            grep -n "image:" deployment.yaml
                             git add deployment.yaml
-                            git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
+                            git commit -m "Update deployment Image to version \${BUILD_NUMBER}" || true
                             git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         '''
                     }
